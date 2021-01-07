@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  /*
+  需求：每次自己处理一下，再请求
+  网络请求：aaa -> 自己处理(10行)
+  再请求处理：aaa+111 -> 自己处理(4行)
+  再请求处理：aaa111+222 -> 自己处理(8行)
+   */
+  // new Promise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     resolve('1aaa')
+  //   }, 1000)
+  // }).then(res => {
+  //   console.log(res,'第一层的10行代码处理');
+  //
+  //   return new Promise(resolve => {
+  //     resolve(res + '111')
+  //   })
+  // }).then(res => {
+  //   console.log(res,'第二层的4行代码处理');
+  //
+  //   return new Promise(resolve => {
+  //     resolve(res + '222')
+  //   })
+  // }).then(res => {
+  //   console.log(res,'第三层的8行代码处理');
+  // })
+
+  // 1.省去一个new Promise,使用Promise.resolve()或Promise.reject()
+  // new Promise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     resolve('2aaa')
+  //   }, 1000)
+  // }).then(res => {
+  //   console.log(res,'第一层的10行代码处理');
+  //
+  //   return Promise.resolve(res+'111')
+  // }).then(res => {
+  //   console.log(res,'第二层的4行代码处理');
+  //
+  //   return Promise.resolve(res+'222')
+  // }).then(res => {
+  //   console.log(res,'第三层的8行代码处理');
+  // })
+
+  // 2.再省略Promise.resolve，会自动进行.resolve()包装
+  // new Promise((resolve, reject) => {
+  //   setTimeout(() => {
+  //     resolve('3aaa')
+  //   }, 1000)
+  // }).then(res => {
+  //   console.log(res,'第一层的10行代码处理');
+  //
+  //   return res+'111'
+  // }).then(res => {
+  //   console.log(res,'第二层的4行代码处理');
+  //
+  //   return res+'222'
+  // }).then(res => {
+  //   console.log(res,'第三层的8行代码处理');
+  // })
+
+  // 3.当多层请求里出现reject拒绝请求时,可以通过Promise.reject(err)或手动throw err;
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('3aaa')
+    }, 1000)
+  }).then(res => {
+    console.log(res,'第一层的10行代码处理');
+    return res+'111'
+  }).then(res => {
+    console.log(res,'第二层的4行代码处理');
+    return res+'222'
+  }).then(res => {
+    console.log(res,'第三层的8行代码处理');
+    return res+'333'
+  }).then(res => {
+    console.log(res,'第四层的4行代码处理');
+    // return Promise.reject('CODE ERROR: 4th request')
+    throw 'ERROR: 4th request'
+  }).then(res => {
+    console.log(res,'第五层的5行代码处理');
+    return res+'555'
+  }).then(res => {
+    console.log(res,'第六层的6行代码处理');
+  }).catch(err => {
+    console.log(err);
+  })
+</script>
+</body>
+</html>

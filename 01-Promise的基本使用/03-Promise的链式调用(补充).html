@@ -80,7 +80,10 @@
     return res+'222'
   }).then(res => {
     console.log(res,'第三层的8行代码处理');
-    return res+'333'
+    return new Promise(reject => {
+      reject('ERROR: 3th request')
+    })
+    // return res+'333'
   }).then(res => {
     console.log(res,'第四层的4行代码处理');
     // return Promise.reject('CODE ERROR: 4th request')

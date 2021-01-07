@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  /*
+  需求：同时有多个网络请求，对不同状态进行处理，都成功就调用.then()
+  iterator:迭代器,可遍历的
+   */
+  Promise.all([
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('第一次请求 成功')
+        }, 1000)
+      }),
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('第二次请求 成功')
+      }, 2000)
+    }),
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        // resolve('第三次请求 成功')
+        reject('第三次请求 失败')
+      }, 1000)
+    }),
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('第四次请求 成功')
+      }, 3000)
+    })
+  ]).then(results => {
+    for(result of results){
+      console.log(result);
+    }
+  }).catch(error => {
+    console.log(error);
+  })
+</script>
+</body>
+</html>

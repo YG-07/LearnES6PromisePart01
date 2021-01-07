@@ -7,7 +7,7 @@ bilibili URL：https://space.bilibili.com/36139192
 视频(126-129p) URL：https://www.bilibili.com/video/BV15741177Eh?p=126  
   
 # 二、本部分知识大纲
-(数字表示视频URL分p)
+(数字表示视频URL分p)  
 ### 一、Promise的结构和基本使用
 (本节使用使用setTimeout定时器模拟不同请求时间的网络请求！)
 * Promise简书 博客 URL：https://www.jianshu.com/p/1b63a13c2701

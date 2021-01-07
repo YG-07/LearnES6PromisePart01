@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Hell Vuejs')
+      reject('Error Message')
+    },1000)
+  }).then(data => {
+    console.log(data);
+  }, err =>{
+    console.log(err);
+  })
+  /*
+    sync 同步
+    async 异步
+    1.pending等待状态，
+    2.fulfill满足状态resolve -> .then(),
+    3.reject拒绝状态reject -> .catch()
+    then()
+   */
+</script>
+</body>
+</html>
